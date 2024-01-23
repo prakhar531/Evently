@@ -1,10 +1,11 @@
 # Evently
 A Full Stack Next 14 Events App
 
-🤖 Introduction
+#🤖 Introduction
 Built on Next.js 14, the events application stands as a comprehensive, full-stack platform for managing events. It serves as a hub, spotlighting diverse events taking place globally. Featuring seamless payment processing through Stripe, you have the capability to purchase tickets for any event or even initiate and manage your own events.
 
 ⚙️ Tech Stack
+
 Node.js
 Next.js
 TypeScript
@@ -16,6 +17,7 @@ Shadcn
 uploadthing
 
 🔋 Features
+
 👉 Authentication (CRUD) with Clerk: User management through Clerk, ensuring secure and efficient authentication.
 
 👉 Events (CRUD): Comprehensive functionality for creating, reading, updating, and deleting events, giving users full control over event management.

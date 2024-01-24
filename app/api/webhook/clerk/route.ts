@@ -1,3 +1,4 @@
+//Svix provides a package for verifying the webhook signature, making it easy to verify the authenticity of the webhook events.
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
@@ -54,6 +55,8 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
+
+  //When an new user is created this event will be triggered by webhooks
 
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =

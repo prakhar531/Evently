@@ -1,4 +1,4 @@
-import React, { startTransition, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -20,6 +20,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Input } from "../ui/input";
+import { createCategory, getAllCategory } from "@/lib/actions/category.actions";
 
 type DropdownProps = {
   value?: string;
@@ -31,8 +32,22 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [newCategory, setNewCategory] = useState("");
 
   const handleAddCategory = () => {
-    throw new Error("Function not implemented.");
+    createCategory({
+      categoryName: newCategory.trim(),
+    }).then((category) => {
+      setCategories((prevState) => [...prevState, category]);
+    });
   };
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categoryList = await getAllCategory();
+
+      categoryList && setCategories(categoryList as ICategory[]);
+    };
+
+    getCategories();
+  }, []);
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -47,13 +62,13 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
               value={category._id}
               className="select-item p-regular-14"
             >
-              Light
+              {category.name}
             </SelectItem>
           ))}
 
         <AlertDialog>
           <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">
-            Open
+            Add new Category
           </AlertDialogTrigger>
           <AlertDialogContent className="bg-white">
             <AlertDialogHeader>

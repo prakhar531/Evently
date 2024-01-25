@@ -1,11 +1,9 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import Image from "next/image";
-
 import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,15 +14,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "next/image";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+
 import { eventFormSchema } from "@/lib/validator";
 import { eventDefaultValues } from "@/constants";
 import Dropdown from "./Dropdown";
-import { Textarea } from "@/components/ui/textarea";
 import { FileUploader } from "./FileUploader";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { Checkbox } from "@/components/ui/checkbox";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -79,28 +79,6 @@ const EventForm = ({ userId, type }: EventFormProps) => {
         console.log(error);
       }
     }
-
-    // if (type === "Update") {
-    //   if (!eventId) {
-    //     router.back();
-    //     return;
-    //   }
-
-    //   try {
-    //     const updatedEvent = await updateEvent({
-    //       userId,
-    //       event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
-    //       path: `/events/${eventId}`,
-    //     });
-
-    //     if (updatedEvent) {
-    //       form.reset();
-    //       router.push(`/events/${updatedEvent._id}`);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
   }
 
   return (

@@ -2,6 +2,7 @@ import React from "react";
 // import Card from './Card'
 // import Pagination from './Pagination'
 import { IEvent } from "@/lib/mongodb/database/models/event.model";
+import Card from "./Card";
 
 type CollectionProps = {
   data: IEvent[];
@@ -23,6 +24,9 @@ const Collection = ({
   collectionType,
   urlParamName,
 }: CollectionProps) => {
+  {
+    console.log(data);
+  }
   return (
     <>
       {data.length > 0 ? (
@@ -34,7 +38,11 @@ const Collection = ({
 
               return (
                 <li key={event._id} className="flex justify-center">
-                  {/* <Card event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} /> */}
+                  <Card
+                    event={event}
+                    hasOrderLink={hasOrderLink}
+                    hidePrice={hidePrice}
+                  />
                 </li>
               );
             })}

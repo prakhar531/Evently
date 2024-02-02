@@ -53,7 +53,7 @@ export default async function Home() {
       </section>
 
       <Collection
-        data={[events?.data]}
+        data={events?.data}
         emptyTitle="No Events Found"
         emptyStateSubtext="Come back later"
         collectionType="All_Events"

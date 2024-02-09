@@ -15,7 +15,15 @@ export async function POST(req: any) {
   try {
     event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
   } catch (err) {
-    return NextResponse.json({ message: "Webhook error", error: err });
+    console.log(err);
+    return NextResponse.json(
+      {
+        message: "Webhook signature verification failed",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   // Get the ID and type

@@ -3,9 +3,11 @@ import { NextResponse } from "next/server";
 import { buffer } from "node:stream/consumers";
 import { createOrder } from "@/lib/actions/order.actions";
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
   // const body = await request.text();
-  const rawBody = await buffer(req.body);
+  const rawBody = await req.text();
+
+  console.log(rawBody);
 
   const sig = req.headers.get("stripe-signature") as string;
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET! as string;
@@ -18,7 +20,7 @@ export async function POST(req: any) {
     console.log(error);
     return NextResponse.json(
       {
-        message: `Webhook signature verification failed: ${error}`,
+        message: `Webhook signature verification modified failed: ${error}`,
       },
       {
         status: 400,

@@ -2,13 +2,10 @@ import stripe from "stripe";
 import { NextResponse } from "next/server";
 
 import { createOrder } from "@/lib/actions/order.actions";
-import { buffer } from "stream/consumers";
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
   // const body = await request.text();
-  const rawBody = await buffer(req);
-
-  console.log(rawBody);
+  const rawBody = await req.text();
 
   const sig = req.headers.get("stripe-signature") as string;
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET! as string;
@@ -21,7 +18,7 @@ export async function POST(req: any) {
     console.log(error);
     return NextResponse.json(
       {
-        message: `Webhook signature verification modified using macro failed: ${error}`,
+        message: `Webhook signature verification failed: ${error}`,
       },
       {
         status: 400,

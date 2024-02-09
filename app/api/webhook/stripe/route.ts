@@ -8,20 +8,12 @@ export async function POST(request: Request) {
   const sig = request.headers.get("stripe-signature") as string;
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-  console.log(body);
-  console.log(sig);
-  console.log(endpointSecret);
-
-  let event: stripe.Event;
+  let event;
 
   try {
-    if (!sig || !endpointSecret) return;
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
   } catch (err) {
-    return NextResponse.json({
-      message: "Webhook error again try something else",
-      error: err,
-    });
+    return NextResponse.json({ message: "Webhook error", error: err });
   }
 
   // Get the ID and type

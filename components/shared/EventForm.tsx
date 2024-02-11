@@ -298,6 +298,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
               <FormItem className="w-full">
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                    {/* //not doller */}
                     <Image
                       src="/assets/icons/dollar.svg"
                       alt="dollar"

@@ -1,3 +1,4 @@
+//stripe webhook
 import stripe from "stripe";
 import { NextResponse } from "next/server";
 
@@ -30,6 +31,7 @@ export async function POST(req: Request) {
   const eventType = event.type;
 
   // CREATE
+  //Listening to checkout.session.completed
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata } = event.data.object;
 

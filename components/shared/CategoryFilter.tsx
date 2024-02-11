@@ -12,7 +12,6 @@ import { ICategory } from "@/lib/mongodb/database/models/category.model";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { string } from "zod";
 
 const CategoryFilter = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);

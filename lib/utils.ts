@@ -66,6 +66,7 @@ export const formatPrice = (price: string) => {
   return formattedPrice;
 };
 
+//forming url form given input text
 export function formUrlQuery({ params, key, value }: UrlQueryParams) {
   const currentUrl = qs.parse(params);
 

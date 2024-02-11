@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook/stripe/route.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.5",

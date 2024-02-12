@@ -1,6 +1,4 @@
 import React from "react";
-// import Card from './Card'
-// import Pagination from './Pagination'
 import { IEvent } from "@/lib/mongodb/database/models/event.model";
 import Card from "./Card";
 import Pagination from "./Pagination";
@@ -30,6 +28,7 @@ const Collection = ({
   // }
   return (
     <>
+      {/* //data is array of events */}
       {data.length > 0 ? (
         <div className="wrapper flex flex-col items-center gap-10">
           <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">

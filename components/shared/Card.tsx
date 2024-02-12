@@ -6,6 +6,13 @@ import React from "react";
 import { auth } from "@clerk/nextjs";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 type CardProps = {
   event: IEvent;
   hasOrderLink?: boolean;
@@ -13,13 +20,15 @@ type CardProps = {
 };
 
 const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
+  // The auth() helper returns the Authentication object of the currently active user
+  // sessionClaim	The current user's session claim.
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
   const isEventCreator = userId === event.organizer._id.toString();
 
   return (
-    <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px] h-auto">
+    <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl md:min-h-[438px] h-auto">
       <Link
         href={`/events/${event._id}`}
         style={{ backgroundImage: `url(${event.imageUrl})` }}
@@ -28,15 +37,24 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
       {/* is creator of event */}
 
       {isEventCreator && !hidePrice && (
-        <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
-          <Link href={`/events/${event._id}/update`}>
-            <Image
-              src="/assets/icons/edit.svg"
-              alt="edit"
-              width={20}
-              height={20}
-            ></Image>
-          </Link>
+        <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all bg-opacity-80 hover:bg-opacity-100">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Link href={`/events/${event._id}/update`}>
+                  <Image
+                    src="/assets/icons/edit.svg"
+                    alt="edit"
+                    width={20}
+                    height={20}
+                  ></Image>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>Update Event</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           <DeleteConfirmation eventId={event._id} />
         </div>

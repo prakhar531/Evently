@@ -112,12 +112,15 @@ export async function getAllEvents({
   try {
     await connectToDatabase();
 
+    // it creates a regular expression with a case-insensitive match for the title
     const titleCondition = query
       ? { title: { $regex: query, $options: "i" } }
       : {};
+
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
+
     const conditions = {
       $and: [
         titleCondition,
@@ -126,6 +129,7 @@ export async function getAllEvents({
     };
 
     const skipAmount = (Number(page) - 1) * limit;
+
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: "desc" })
       .skip(skipAmount)

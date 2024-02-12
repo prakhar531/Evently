@@ -8,11 +8,25 @@ import Image from "next/image";
 import { formatDateTime } from "@/lib/utils";
 import Collection from "@/components/shared/Collection";
 import CheckoutButton from "@/components/shared/CheckoutButton";
+import { auth } from "@clerk/nextjs";
+import { getOrdersByUser } from "@/lib/actions/order.actions";
+import { IOrder } from "@/lib/mongodb/database/models/order.model";
 
 const EventDetails = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
+  // const { sessionClaims } = auth();
+  // const userId = sessionClaims?.userId as string;
+
+  // const orders = await getOrdersByUser({ userId, page: 1 });
+  // const orderedEvents = orders?.data.map((order: IOrder) => order.event) || [];
+
+  // let purchasedEvent = false;
+  // for (let event of orderedEvents) {
+  //   if(userId === event.userId)
+  // }
+
   const event = await getEventById(id);
 
   const relatedEvents = await getRelatedEventsByCategory({
